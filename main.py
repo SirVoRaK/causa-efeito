@@ -13,11 +13,11 @@ data = [
     },
     {
         "linguagem": "C#",
-        "caracteristicas": { "facilidade": 3, "velocidade": 7, "salario": 7, "vagas": 6, "versatilidade": 4 }
+        "caracteristicas": { "facilidade": 3, "velocidade": 7, "salario": 7, "vagas": 6, "versatilidade": 5 }
     },
     {
         "linguagem": "GoLang",
-        "caracteristicas": { "facilidade": 6, "velocidade": 8, "salario": 7, "vagas": 4, "versatilidade": 3 }
+        "caracteristicas": { "facilidade": 6, "velocidade": 8, "salario": 7, "vagas": 5, "versatilidade": 3 }
     },
     {
         "linguagem": "C",
@@ -33,7 +33,7 @@ data = [
     },
     {
         "linguagem": "Ruby",
-        "caracteristicas": { "facilidade": 6, "velocidade": 5, "salario": 5, "vagas": 2, "versatilidade": 5 }
+        "caracteristicas": { "facilidade": 6, "velocidade": 5, "salario": 5, "vagas": 2, "versatilidade": 4 }
     },
     {
         "linguagem": "Assembly",
@@ -100,6 +100,7 @@ def exibir_resultados(pesos):
     for peso in pesos:
         print("%s: %.1f%%"%(peso["linguagem"], peso["porcentagem"]))
 
+# Bubble Sort para ordenar os pesos de forma decrescente a partir da porcentagem
 def bubble_sort(lista):
     for _ in lista:
         for j in range(len(lista) - 1):
