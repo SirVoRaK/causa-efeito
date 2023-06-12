@@ -57,6 +57,7 @@ def solicitar_numero_dentro_intervalo(mensagem, minimo, maximo):
 
 def solicitar_caracteristicas():
     caracteristicas = []
+    # Verificar quais são as caracteristicas disponíveis (podem ser diferentes por linguagem)
     for linguagem in data:
         for caracteristica in linguagem["caracteristicas"]:
             if not caracteristica in caracteristicas:
@@ -100,12 +101,35 @@ def exibir_resultados(pesos):
     for peso in pesos:
         print("%s: %.1f%%"%(peso["linguagem"], peso["porcentagem"]))
 
-# Bubble Sort para ordenar os pesos de forma decrescente a partir da porcentagem
-def bubble_sort(lista):
-    for _ in lista:
-        for j in range(len(lista) - 1):
-            if lista[j]["porcentagem"] < lista[j + 1]["porcentagem"]:
-                inverter(lista, j, j + 1)
+def ordenar_pesos(lista):
+    quick_sort(lista, 0, len(lista) - 1)
+
+# Quick Sort para ordenar os pesos de forma decrescente a partir da porcentagem
+def quick_sort(lista, start, end):
+    if start >= end:
+        return
+
+    # Separar a lista em duas partes baseado em um pivô
+    index = partion(lista, start, end)
+    # Executar o quick sort para cada uma das partes
+    quick_sort(lista, start, index - 1)
+    quick_sort(lista, index + 1, end)
+
+def partion(lista, start ,end):
+    # O pivô é o último elemento da lista
+    pivot_index = start
+    pivot_value = lista[end]["porcentagem"]
+
+    for i in range(start, end + 1):
+        if lista[i]["porcentagem"] > pivot_value:
+            # Colocar os elementos maiores que o pivô na parte esquerda da lista
+            inverter(lista, i, pivot_index)
+            pivot_index += 1
+    # Colocar o pivô na posição correta
+    inverter(lista, pivot_index, end)
+
+    # Retornar o índice do pivô ("meio da separação")
+    return pivot_index
 
 def inverter(lista, i, j):
     temp = lista[i]
@@ -123,7 +147,7 @@ def perguntar(mensagem):
 while True:
     caracteristicas = solicitar_caracteristicas()
     pesos = calcular_pesos(caracteristicas)
-    bubble_sort(pesos)
+    ordenar_pesos(pesos)
     exibir_resultados(pesos)
 
     continuar = perguntar("Deseja verificar mais alguma caracteristica?")
